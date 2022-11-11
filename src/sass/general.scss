@@ -1,0 +1,17 @@
+@import 'staff/variables';
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+@import 'blocks/titles';
+@import 'blocks/header';
+@import 'blocks/cats';

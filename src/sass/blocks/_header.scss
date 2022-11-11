@@ -1,0 +1,16 @@
+.header {
+    background: url('../img/promo-bg.png') center center/cover no-repeat;
+    background-position: right 50% bottom 80%;
+    width: 100%;
+    height: 600px;
+    padding-top: 50px;
+    overflow: hidden;
+    &__wrapper {
+        display: flex;
+    }
+    &__logo {
+        i {
+            color: aliceblue;
+        }
+    }
+}
