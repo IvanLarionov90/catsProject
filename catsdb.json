@@ -1,0 +1,101 @@
+{
+  "cats": [
+    {
+      "id": 1,
+      "age": 5,
+      "name": "Marquiz",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 10,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": true,
+      "img_link": "https://i02.fotocdn.net/s109/898b102542022f16/public_pin_m/2410994512.jpg"
+    },
+    {
+      "id": 2,
+      "age": 5,
+      "name": "Duncan",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 9,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": true,
+      "img_link": "https://p4.tabor.ru/feed/2018-10-14/18075634/1169802_760x500.jpg"
+    },
+    {
+      "id": 3,
+      "age": 5,
+      "name": "Batsik",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 8,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": true,
+      "img_link": "https://cdn.fishki.net/upload/post/201511/15/1738136/qcvjzger9yg.jpg"
+    },
+    {
+      "id": 4,
+      "age": 5,
+      "name": "Barbaris",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 7,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": false,
+      "img_link": "https://sun1-86.userapi.com/s/v1/if1/VTHKxsa3VNSY3CagdJIMbQOvnSaSQ_I6g_-lzb1lXBmYx9qmTuoUl8zTPhkyTfRP0ela9Q.jpg?size=350x500&quality=96&crop=0,0,350,500&ava=1"
+    },
+    {
+      "id": 5,
+      "age": 5,
+      "name": "Barsik",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 6,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": false,
+      "img_link": "https://cdn.fishki.net/upload/post/201511/15/1738136/lm2cmeiigfm.jpg"
+    },
+    {
+      "id": 5,
+      "age": 5,
+      "name": "Chmohya",
+      "shortDescr": "cuttiest cat ever",
+      "rate": 5,
+      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "favorite": false,
+      "img_link": "https://i.ibb.co/vmSs9SR/100796727-original.jpg"
+    }
+  ],
+  "requests": [
+    {
+      "name": "Иван",
+      "phone": "+7 906 807 11 11",
+      "id": 1
+    },
+    {
+      "name": "Иван",
+      "phone": "+7 906 807 11 11",
+      "id": 2
+    },
+    {
+      "name": "112",
+      "phone": "12",
+      "id": 3
+    },
+    {
+      "name": "12",
+      "phone": "12",
+      "id": 4
+    },
+    {
+      "name": "12",
+      "phone": "12",
+      "id": 5
+    },
+    {
+      "name": "inap",
+      "phone": "3421312",
+      "id": 6
+    },
+    {
+      "name": "123",
+      "phone": "123",
+      "id": 7
+    }
+  ]
+}
