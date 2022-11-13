@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const result = await fetch(url);
     
         if (!result.ok) {
-            throw new Error(`could not fetch ${url}, status: ${res.status}`);
+            throw new Error(`could not fetch ${url}, status: ${result.status}`);
         }
     
         return await result.json();
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
         favor() {
             if (this.favorite) {
-                return '<i class="fa-solid fa-heart"></i>';
+                return '<i class="fa-solid fa-heart" id="likes"></i>';
             } else {
-                return '<i class="fa-regular fa-heart"></i>';
+                return '<i class="fa-regular fa-heart" id="likes"></i>';
             }
         }
 
@@ -66,17 +66,27 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             document.querySelector('.cards__wrapper').append(element);
         }
+
+        setListeners() {
+            document.querySelectorAll('#likes').forEach(like => {
+                like.addEventListener('click', () => {
+                    like.classList.toggle('fa-solid');
+                    like.classList.toggle('fa-regular');
+                });
+            });
+        }
+
+        init() {
+            this.render();
+            this.setListeners();
+        }
     }
     
     getResource('http://localhost:3004/cats').then(data => {
         data.forEach(({id, age, name, shortDescr, rate, description, favorite, img_link}) => {
-            new CatCard(id, age, name, shortDescr, rate, description, favorite, img_link).render();
+            new CatCard(id, age, name, shortDescr, rate, description, favorite, img_link).init();
         });
     });
 
-
-    document.querySelector('.favorite').addEventListener('click', () => {
-        console.log('123');
-    });
 });
 

@@ -37,7 +37,7 @@
       "shortDescr": "cuttiest cat ever",
       "rate": 7,
       "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
-      "favorite": false,
+      "favorite": true,
       "img_link": "https://sun1-86.userapi.com/s/v1/if1/VTHKxsa3VNSY3CagdJIMbQOvnSaSQ_I6g_-lzb1lXBmYx9qmTuoUl8zTPhkyTfRP0ela9Q.jpg?size=350x500&quality=96&crop=0,0,350,500&ava=1"
     },
     {
@@ -47,17 +47,17 @@
       "shortDescr": "cuttiest cat ever",
       "rate": 6,
       "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
-      "favorite": false,
+      "favorite": true,
       "img_link": "https://cdn.fishki.net/upload/post/201511/15/1738136/lm2cmeiigfm.jpg"
     },
     {
       "id": 5,
       "age": 5,
-      "name": "Chmohya",
+      "name": "Chmonya",
       "shortDescr": "cuttiest cat ever",
       "rate": 5,
       "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
-      "favorite": false,
+      "favorite": true,
       "img_link": "https://i.ibb.co/vmSs9SR/100796727-original.jpg"
     }
   ],
