@@ -1,0 +1,68 @@
+.form {
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 650px;
+    width: 500px;
+    padding: 30px;
+    border: 2px solid;
+    border-radius: 15px;
+    overflow: hidden;
+    padding-right: 20px;
+    background: url(../img/formBG.jpg) center center/cover no-repeat;
+    transition: all .7s ease;
+    #modal__close {
+        cursor: pointer;
+        position: absolute;
+        font-size: 32px;
+        top: 15px;
+        right: 15px;
+        color: $yellow;
+    }
+    &__items {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding-top: 20px;
+        input {
+            width: 250px;
+            height: 30px;
+            border-radius: 10px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        textarea {
+            height: 100px;
+            width: 320px;
+            border-radius: 10px;
+            resize: none;
+            padding: 10px 10px;
+            margin-bottom: 10px;
+        }
+        label {
+            font-size: 14px;
+            color: $txt-color;
+        }
+        button {
+            border-radius: 10px;
+            height: 35px;
+            width: 200px;
+            text-transform: uppercase;
+            transition: all .3s ease;
+            &:hover {
+                cursor: pointer;
+                background-color: black;
+                color: $txt-color;
+            }
+        }
+    }
+    h2 {
+        text-transform: uppercase;
+        text-align: center;
+        font-family: 'Rubik Bubbles', cursive;
+        color: $txt-color;
+        font-size: 32px;
+    }
+}
