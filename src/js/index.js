@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const myForm = document.querySelector('.form__items'),
           message = {
             loading: 'cat are loading...',
-            success: 'Thanks, your cat is in database',
+            success: 'Thanks, your cat is in database!',
             failure: 'Something wrong...'
             },
           messageCSS = 'display: block; margin: 0 auto; text-align: center; color: white; margin-top: 10px;';
