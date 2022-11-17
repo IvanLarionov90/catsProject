@@ -30,9 +30,25 @@
         #modal__close {
             cursor: pointer;
             position: absolute;
-            font-size: 32px;
+            font-size: 25px;
             top: 15px;
             right: 15px;
+            color: $yellow;
+        }
+        .fa-trash {
+            cursor: pointer;
+            position: absolute;
+            font-size: 25px;
+            top: 15px;
+            right: 60px;
+            color: $yellow;
+        }
+        .fa-pen-to-square {
+            cursor: pointer;
+            position: absolute;
+            font-size: 25px;
+            top: 15px;
+            right: 100px;
             color: $yellow;
         }
     }

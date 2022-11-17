@@ -2,63 +2,63 @@
   "cats": [
     {
       "id": 1,
-      "age": 5,
-      "name": "Marcuis",
-      "shortDescr": "cuttiest cat ever",
-      "rate": 10,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
-      "favorite": true,
-      "img_link": "https://i02.fotocdn.net/s109/898b102542022f16/public_pin_m/2410994512.jpg"
+      "age": "1",
+      "name": "Chmonya",
+      "shortDescr": "что за имя такое дурацкое",
+      "rate": "10",
+      "description": "сидит маленький котик в машине, на секунду задумался кто он есть, кто мы есть такие, куда едем вообще, куда двигаемся по жизни",
+      "favorite": false,
+      "img_link": "https://i.ibb.co/vmSs9SR/100796727-original.jpg"
     },
     {
       "id": 2,
-      "age": 5,
-      "name": "Duncan",
-      "shortDescr": "cuttiest cat ever",
-      "rate": 9,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "age": "13",
+      "name": "Bender",
+      "shortDescr": "пристальный взгляд. серьёзный кот",
+      "rate": "9",
+      "description": "толстенький и требовательный кот, очень хочет больше кушать, кормят маленькими порциями",
       "favorite": true,
-      "img_link": "https://p4.tabor.ru/feed/2018-10-14/18075634/1169802_760x500.jpg"
+      "img_link": "https://cs12.pikabu.ru/images/big_size_comm_an/2021-10_2/1633585876178796303.gif"
     },
     {
       "id": 3,
       "age": 5,
-      "name": "Batsik",
-      "shortDescr": "cuttiest cat ever",
+      "name": "Vibing Cat",
+      "shortDescr": "просто наслаждается вайбом",
       "rate": 8,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "description": "вероятно чем-то очень доволен, наслаждается своей маленькой, но приятной победой",
       "favorite": true,
-      "img_link": "https://cdn.fishki.net/upload/post/201511/15/1738136/qcvjzger9yg.jpg"
+      "img_link": "https://s3.wi-fi.ru/cp3o/6FZukLjEuuVSgvMmwmNNnnW2?response-content-type=image%2Fgif"
     },
     {
       "id": 4,
       "age": 5,
-      "name": "Barbaris",
-      "shortDescr": "cuttiest cat ever",
-      "rate": 7,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "name": "Fedya",
+      "shortDescr": "добрый серенький красавец",
+      "rate": 8,
+      "description": "ведет свой блог, счастливо живёт в приюте со своими друганами-котанами, хорошо кушает и любим своим человеком",
       "favorite": true,
-      "img_link": "https://sun1-86.userapi.com/s/v1/if1/VTHKxsa3VNSY3CagdJIMbQOvnSaSQ_I6g_-lzb1lXBmYx9qmTuoUl8zTPhkyTfRP0ela9Q.jpg?size=350x500&quality=96&crop=0,0,350,500&ava=1"
+      "img_link": "https://cs12.pikabu.ru/images/big_size_comm_an/2021-07_2/1625712672166777412.gif"
     },
     {
       "id": 5,
       "age": 5,
       "name": "Barsik",
-      "shortDescr": "cuttiest cat ever",
+      "shortDescr": "встретились взглядом",
       "rate": 6,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
+      "description": "пронзительный взгляд, кто знает, о чём он думает",
       "favorite": true,
-      "img_link": "https://cdn.fishki.net/upload/post/201511/15/1738136/lm2cmeiigfm.jpg"
+      "img_link": "https://www.gifcen.com/wp-content/uploads/2022/04/cat-gif.gif"
     },
     {
       "id": 6,
-      "age": 5,
-      "name": "Chmonya",
-      "shortDescr": "cuttiest cat ever",
-      "rate": 5,
-      "description": "Самый милый и ласковый котик во всём мире, пушистое счастье для каждого, любит спать и разговаривать с людьми",
-      "favorite": true,
-      "img_link": "https://i.ibb.co/vmSs9SR/100796727-original.jpg"
+      "age": 20,
+      "name": "Dunya",
+      "shortDescr": "пытается закончить этот проект",
+      "rate": 1,
+      "description": "пилила сайт с котами почти 3 дня, пытается его доработать, но сама уже не понимает, что накодила и почему это вообще хоть немного работает",
+      "favorite": false,
+      "img_link": "https://media.tenor.com/NZqiUoAnAFsAAAAC/cat-computer.gif"
     }
   ],
   "requests": [

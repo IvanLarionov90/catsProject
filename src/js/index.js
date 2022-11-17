@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const api = 'http://localhost:3004/cats/';
+
     const postData = async (url, data) => {
         const result = await fetch(url, {
             method: 'POST',
@@ -12,14 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         return await result.json();
     };
-    
     const getResource = async (url) => {
         const result = await fetch(url);
-    
         if (!result.ok) {
             throw new Error(`could not fetch ${url}, status: ${result.status}`);
         }
-    
         return await result.json();
     };
     
@@ -36,35 +35,103 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         delCard() {        
-            fetch('http://localhost:3004/cats/' + this.dataset.id, {
+            fetch(api + this.dataset.id, {
                 method: 'DELETE',
             });
         }
 
         rewriteCard() {
-            fetch('http://localhost:3004/cats/' + this.dataset.id, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                    age: 8
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
+            getResource(api + this.dataset.id)
+                .then(data => {
+                    document.querySelector('.main-overlay').style.visibility = 'visible';
+                    document.body.style.overflow = 'hidden';
+                    const element = document.createElement('div');
+                    element.classList.add('rewForm');
+                    element.innerHTML = `
+                        <i class="fa-regular fa-circle-xmark" id="modal__close"></i>
+                        <h2>введите новые данные котика</h2>
+                        <form class="rewForm__items">
+                            <label for="id">идентификатор котика</label>
+                            <input name="id" type="text" placeholder="введите id" readonly required value="${data.id}">
+                            <label for="age">возраст котика</label>
+                            <input name="age" type="number" min="0" max="30" placeholder="сколько лет котику" required value="${data.age}">
+                            <label for="name">имя котика</label>
+                            <input name="name" type="text" placeholder="введите имя котика" required value="${data.name}">
+                            <label for="shortDescr">краткое описание котика</label>
+                            <input name="shortDescr" type="text" placeholder="краткое описание котика" required value="${data.shortDescr}">
+                            <label for="rate">рейтинг котика</label>
+                            <input name="rate" type="number" min="1" max="10" placeholder="рейтинг котика" required value="${data.rate}">
+                            <label for="description">описание котика</label>
+                            <textarea class='textarea' name="description" type="text" placeholder="${data.description}" required"></textarea>
+                            <label for="favorite">добавить в любимые</label>
+                            <input name="favorite" type="checkbox" class="checkFav" checked>
+                            <label for="img_link">ссылка на фото котика</label>
+                            <input name="img_link" type="text" placeholder="ссылка на фото котика" required value="${data.img_link}">
+                            <button type="submit" id="sendRewForm">изменить котика</button>
+                        </form>
+                    `;
+                    document.querySelector('.main-overlay').append(element);
+                    element.querySelector('.textarea').value = data.description;
+                    element.style.left = '50%';
+                    document.querySelectorAll('.modal__wrapper').forEach(item => {
+                        item.style.left = '-100%';
+                    });
+                    function isFavorite() {
+                        if (element.querySelector('.checkFav').checked) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                    element.querySelector('.rewForm__items').addEventListener('submit', () => {
+                        const rewForm = Object.fromEntries(new FormData(document.querySelector('.rewForm__items')));
+                        fetch(api + rewForm.id, {
+                            method: 'PATCH',
+                            body: JSON.stringify({
+                                id: rewForm.id,
+                                age: rewForm.age,
+                                name: rewForm.name,
+                                shortDescr: rewForm.shortDescr,
+                                rate: rewForm.rate,
+                                description: rewForm.description,
+                                favorite: isFavorite(),
+                                img_link: rewForm.img_link
+                            }),
+                            headers: {
+                                'Content-type': 'application/json'
+                            }
+                        });
+                    });
+
+                    element.querySelector('.fa-circle-xmark').addEventListener('click', () => {
+                        element.style.left = '-50%';
+                        document.querySelector('.main-overlay').style.visibility = 'hidden';
+                        document.body.style.overflow = '';
+                        setInterval(() => {
+                           element.remove(); 
+                        }, 2000);
+                    });
+                });
         }
     
         favor() {
             if (this.favorite) {
-                return '<i class="fa-solid fa-heart" id="likes"></i>';
+                return '<i class="fa-solid fa-heart likes"></i>';
             } else {
-                return '<i class="fa-regular fa-heart" id="likes"></i>';
+                return '<i class="fa-regular fa-heart likes"></i>';
             }
+        }
+
+        closeAllModal() {
+            document.querySelectorAll('.modal__wrapper').forEach(item => {
+                item.style.left = '-100%';
+            });
         }
 
         renderCards() {
             const element = document.createElement('div');
             element.classList.add('card', 'cat-card');
-            element.style.background = `url(${this.img_link}) no-repeat`;
+            element.style.background = `url(${this.img_link}) center center/cover no-repeat`;
             element.innerHTML = `
                 <div class="title-content">
                     <h3>${this.name}</h3>
@@ -83,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="color-overlay"></div>
                 <i class="fa-solid fa-arrow-up-right-from-square" id="openModal"></i>
                 <div class="edit-or-delete">
-                    <i class="fa-solid fa-trash" data-id=${this.id}></i>
+                    <i class="fa-solid fa-trash fa-trash-card" data-id=${this.id}></i>
                     <i class="fa-solid fa-pen-to-square" data-id=${this.id}></i>
                 </div>
             `;
@@ -96,6 +163,8 @@ document.addEventListener('DOMContentLoaded', function () {
             element.classList.add('modal__window');
             element.innerHTML = `
                 <div class="modal__wrapper">
+                    <i class="fa-solid fa-trash fa-trash-modal" data-id=${this.id}></i>
+                    <i class="fa-solid fa-pen-to-square" data-id=${this.id}></i>
                     <i class="fa-regular fa-circle-xmark" id="modal__close"></i>
                     <div class="modal__photo">
                         <img class="modalCatImg" src="${this.img_link}" alt="catimg">
@@ -121,19 +190,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         setListeners() {
-            document.querySelectorAll('#likes').forEach(like => {
-                like.addEventListener('click', () => {
-                    like.classList.toggle('fa-solid');
-                    like.classList.toggle('fa-regular');
+
+            const cards = document.querySelectorAll('.card'),
+                  overlay = document.querySelector('.main-overlay');
+
+            cards.forEach((card, i) => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('likes')) {
+                        e.target.classList.toggle('fa-solid');
+                        e.target.classList.toggle('fa-regular');
+                    }
+                    if (e.target.id == 'openModal') {
+                        document.querySelector('.main-overlay').style.visibility = 'visible';
+                        document.querySelectorAll('.modal__wrapper')[i].style.left = '50%';
+                        document.body.style.overflow = 'hidden';
+                    }
                 });
             });
 
-            document.querySelectorAll('#openModal').forEach((openModal, i) => {
-                openModal.addEventListener('click', () => {
-                    document.querySelector('.main-overlay').style.visibility = 'visible';
-                    document.querySelectorAll('.modal__wrapper')[i].style.left = '50%';
-                    document.body.style.overflow = 'hidden';
-                });
+            overlay.addEventListener('click', (e) => {
+                if (e.target.id == 'modal__close') {
+                    document.querySelector('.main-overlay').style.visibility = 'hidden';
+                    document.body.style.overflow = '';
+                    this.closeAllModal();
+                    document.querySelector('.form').style.left = '-50%';
+                }
             });
 
             document.querySelector('#openForm').addEventListener('click', () => {
@@ -141,28 +222,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('.main-overlay').style.visibility = 'visible';
                 document.body.style.overflow = 'hidden';
             });
-
-            document.querySelectorAll('#modal__close').forEach(closeModal => {
-                closeModal.addEventListener('click', () => {
-                    document.querySelector('.main-overlay').style.visibility = 'hidden';
-                    document.body.style.overflow = '';
-                    document.querySelectorAll('.modal__wrapper').forEach(item => {
-                        item.style.left = '-100%';
-                    });
-                    document.querySelector('.form').style.left = '-50%';
-                });
+            document.querySelectorAll('.fa-pen-to-square').forEach((item) => {
+                item.addEventListener('click', this.rewriteCard);
             });
-
-            document.querySelectorAll('.fa-trash').forEach((item, i) => {
+            document.querySelectorAll('.fa-trash-card').forEach((item, i) => {
                 item.addEventListener('click', this.delCard);
                 item.addEventListener('click', () => {
                     const arrCards = document.querySelectorAll('.card');
                     arrCards[i].style.display = 'none';
                 });
             });
-
-            document.querySelectorAll('.fa-pen-to-square').forEach(item => {
-                item.addEventListener('click', this.rewriteCard);
+            document.querySelectorAll('.fa-trash-modal').forEach((item, i) => {
+                item.addEventListener('click', this.delCard);
+                item.addEventListener('click', () => {
+                    const arrCards = document.querySelectorAll('.card');
+                    arrCards[i].style.display = 'none';
+                    this.closeAllModal();
+                    document.querySelector('.main-overlay').style.visibility = 'hidden';
+                    document.body.style.overflow = '';
+                });
             });
         }
 
@@ -173,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
-    getResource('http://localhost:3004/cats').then(data => {
+    getResource(api).then(data => {
         data.forEach(({id, age, name, shortDescr, rate, description, favorite, img_link}) => {
             new CatCard(id, age, name, shortDescr, rate, description, favorite, img_link).init();
         });
@@ -192,10 +270,8 @@ document.addEventListener('DOMContentLoaded', function () {
         statusMessage.textContent = message.loading;
         statusMessage.style.cssText = messageCSS;
         myForm.insertAdjacentElement('afterend', statusMessage);
-
         const json = JSON.stringify(Object.fromEntries(new FormData(myForm)));
-
-        postData('http://localhost:3004/cats', json)
+        postData(api, json)
             .then(data => {
                 console.log(data);
                 statusMessage.textContent = message.success;
@@ -221,8 +297,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.body.style.overflow = '';
                 }, 2000);
             });
-
     });
-        
 });
 
