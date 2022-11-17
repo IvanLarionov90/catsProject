@@ -35,9 +35,21 @@ document.addEventListener('DOMContentLoaded', function () {
             this.img_link = img_link;
         }
 
-        delCard() {            
-            fetch('http://localhost:3004/cats/' + this.id, {
+        delCard() {        
+            fetch('http://localhost:3004/cats/' + this.dataset.id, {
                 method: 'DELETE',
+            });
+        }
+
+        rewriteCard() {
+            fetch('http://localhost:3004/cats/' + this.dataset.id, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    age: 8
+                }),
+                headers: {
+                    'Content-type': 'application/json'
+                }
             });
         }
     
@@ -71,11 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="color-overlay"></div>
                 <i class="fa-solid fa-arrow-up-right-from-square" id="openModal"></i>
                 <div class="edit-or-delete">
-                    <i class="fa-solid fa-trash" id="${this.id}"></i>
-                    <i class="fa-solid fa-pen-to-square" id="${this.id}"></i>
+                    <i class="fa-solid fa-trash" data-id=${this.id}></i>
+                    <i class="fa-solid fa-pen-to-square" data-id=${this.id}></i>
                 </div>
             `;
             document.querySelector('.cards__wrapper').append(element);
+
         }
 
         renderModal() {
@@ -147,6 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     arrCards[i].style.display = 'none';
                 });
             });
+
+            document.querySelectorAll('.fa-pen-to-square').forEach(item => {
+                item.addEventListener('click', this.rewriteCard);
+            });
         }
 
         init() {
@@ -165,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const myForm = document.querySelector('.form__items'),
           message = {
             loading: 'cat are loading...',
-            success: 'Thanks, your cat is in database',
+            success: 'Thanks, your cat is in database!',
             failure: 'Something wrong...'
             },
           messageCSS = 'display: block; margin: 0 auto; text-align: center; color: white; margin-top: 10px;';

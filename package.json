@@ -1,7 +1,6 @@
 {
   "name": "catsproj",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,5 +34,14 @@
     "autoprefixer": "^10.4.13",
     "node-fetch": "^3.3.0",
     "save-dev": "^0.0.1-security"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LarisaKuklinova2000/catsProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LarisaKuklinova2000/catsProject/issues"
+  },
+  "homepage": "https://github.com/LarisaKuklinova2000/catsProject#readme",
+  "description": ""
 }
