@@ -2,62 +2,56 @@
   "cats": [
     {
       "id": 1,
-      "age": "1",
+      "age": 1,
       "name": "Chmonya",
-      "shortDescr": "что за имя такое дурацкое",
-      "rate": "10",
-      "description": "сидит маленький котик в машине, на секунду задумался кто он есть, кто мы есть такие, куда едем вообще, куда двигаемся по жизни",
-      "favorite": false,
+      "rate": 5,
+      "description": "едет в машине и задумался, кто он, зачем это всё, куда едет и почему",
+      "favourite": true,
       "img_link": "https://i.ibb.co/vmSs9SR/100796727-original.jpg"
     },
     {
       "id": 2,
       "age": "13",
       "name": "Bender",
-      "shortDescr": "пристальный взгляд. серьёзный кот",
       "rate": "9",
       "description": "толстенький и требовательный кот, очень хочет больше кушать, кормят маленькими порциями",
-      "favorite": true,
+      "favourite": true,
       "img_link": "https://cs12.pikabu.ru/images/big_size_comm_an/2021-10_2/1633585876178796303.gif"
     },
     {
       "id": 3,
       "age": 5,
       "name": "Vibing Cat",
-      "shortDescr": "просто наслаждается вайбом",
       "rate": 8,
       "description": "вероятно чем-то очень доволен, наслаждается своей маленькой, но приятной победой",
-      "favorite": true,
+      "favourite": true,
       "img_link": "https://s3.wi-fi.ru/cp3o/6FZukLjEuuVSgvMmwmNNnnW2?response-content-type=image%2Fgif"
     },
     {
       "id": 4,
       "age": 5,
       "name": "Fedya",
-      "shortDescr": "добрый серенький красавец",
       "rate": 8,
       "description": "ведет свой блог, счастливо живёт в приюте со своими друганами-котанами, хорошо кушает и любим своим человеком",
-      "favorite": true,
+      "favourite": true,
       "img_link": "https://cs12.pikabu.ru/images/big_size_comm_an/2021-07_2/1625712672166777412.gif"
     },
     {
       "id": 5,
       "age": 5,
       "name": "Barsik",
-      "shortDescr": "встретились взглядом",
       "rate": 6,
       "description": "пронзительный взгляд, кто знает, о чём он думает",
-      "favorite": true,
+      "favourite": true,
       "img_link": "https://www.gifcen.com/wp-content/uploads/2022/04/cat-gif.gif"
     },
     {
       "id": 6,
       "age": 20,
       "name": "Dunya",
-      "shortDescr": "пытается закончить этот проект",
       "rate": 1,
       "description": "пилила сайт с котами почти 3 дня, пытается его доработать, но сама уже не понимает, что накодила и почему это вообще хоть немного работает",
-      "favorite": false,
+      "favourite": false,
       "img_link": "https://media.tenor.com/NZqiUoAnAFsAAAAC/cat-computer.gif"
     }
   ],

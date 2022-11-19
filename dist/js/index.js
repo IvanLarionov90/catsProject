@@ -2,8 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    const api = 'http://localhost:3004/cats/';
-
     const postData = async (url, data) => {
         const result = await fetch(url, {
             method: 'POST',
@@ -14,6 +12,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         return await result.json();
     };
+
+    const rewData = async (url, data) => {
+        const result = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data
+        });
+        return await result.json();
+    };
+
     const getResource = async (url) => {
         const result = await fetch(url);
         if (!result.ok) {
@@ -23,25 +33,32 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     
     class CatCard {
-        constructor(id, age, name, shortDescr, rate, description, favorite, img_link) {
+        constructor(id, name, favourite, rate, age, description, img_link) {
             this.id = id;
-            this.age = age + ' y.o';
             this.name = name;
-            this.shortDescr = shortDescr;
+            this.favourite = favourite;
             this.rate = rate;
+            this.age = age + ' y.o';
             this.description = description;
-            this.favorite = favorite;
             this.img_link = img_link;
         }
 
         delCard() {        
-            fetch(api + this.dataset.id, {
+            fetch('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/delete/' + this.dataset.id, {
                 method: 'DELETE',
             });
         }
 
+        isFavour() {
+            if (document.querySelector('.checkFav').checked) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         rewriteCard() {
-            getResource(api + this.dataset.id)
+            getResource('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show/' + this.dataset.id)
                 .then(data => {
                     document.querySelector('.main-overlay').style.visibility = 'visible';
                     document.body.style.overflow = 'hidden';
@@ -52,55 +69,54 @@ document.addEventListener('DOMContentLoaded', function () {
                         <h2>введите новые данные котика</h2>
                         <form class="rewForm__items">
                             <label for="id">идентификатор котика</label>
-                            <input name="id" type="text" placeholder="введите id" readonly required value="${data.id}">
+                            <input name="id" type="text" placeholder="введите id" readonly required value="${data.data.id}">
                             <label for="age">возраст котика</label>
-                            <input name="age" type="number" min="0" max="30" placeholder="сколько лет котику" required value="${data.age}">
+                            <input name="age" type="number" min="0" max="30" placeholder="сколько лет котику" required value="${data.data.age}">
                             <label for="name">имя котика</label>
-                            <input name="name" type="text" placeholder="введите имя котика" required value="${data.name}">
-                            <label for="shortDescr">краткое описание котика</label>
-                            <input name="shortDescr" type="text" placeholder="краткое описание котика" required value="${data.shortDescr}">
+                            <input name="name" type="text" placeholder="введите имя котика" readonly required value="${data.data.name}">
                             <label for="rate">рейтинг котика</label>
-                            <input name="rate" type="number" min="1" max="10" placeholder="рейтинг котика" required value="${data.rate}">
+                            <input name="rate" type="number" min="1" max="10" placeholder="рейтинг котика" required value="${data.data.rate}">
                             <label for="description">описание котика</label>
-                            <textarea class='textarea' name="description" type="text" placeholder="${data.description}" required"></textarea>
-                            <label for="favorite">добавить в любимые</label>
-                            <input name="favorite" type="checkbox" class="checkFav" checked>
+                            <textarea class='textarea' name="description" type="text" placeholder="${data.data.description}" required"></textarea>
+                            <label for="favourite">добавить в любимые</label>
+                            <input name="favourite" type="checkbox" class="checkFav" checked>
                             <label for="img_link">ссылка на фото котика</label>
-                            <input name="img_link" type="text" placeholder="ссылка на фото котика" required value="${data.img_link}">
+                            <input name="img_link" type="text" placeholder="ссылка на фото котика" required value="${data.data.img_link}">
                             <button type="submit" id="sendRewForm">изменить котика</button>
                         </form>
                     `;
                     document.querySelector('.main-overlay').append(element);
-                    element.querySelector('.textarea').value = data.description;
+                    element.querySelector('.textarea').value = data.data.description;
                     element.style.left = '50%';
                     document.querySelectorAll('.modal__wrapper').forEach(item => {
                         item.style.left = '-100%';
                     });
-                    function isFavorite() {
+                    function isfavourite() {
                         if (element.querySelector('.checkFav').checked) {
                             return true;
                         } else {
                             return false;
                         }
                     }
-                    element.querySelector('.rewForm__items').addEventListener('submit', () => {
+
+                    element.querySelector('.rewForm__items').addEventListener('submit', (e) => {
+                        e.preventDefault();
                         const rewForm = Object.fromEntries(new FormData(document.querySelector('.rewForm__items')));
-                        fetch(api + rewForm.id, {
-                            method: 'PATCH',
-                            body: JSON.stringify({
-                                id: rewForm.id,
-                                age: rewForm.age,
-                                name: rewForm.name,
-                                shortDescr: rewForm.shortDescr,
-                                rate: rewForm.rate,
-                                description: rewForm.description,
-                                favorite: isFavorite(),
-                                img_link: rewForm.img_link
-                            }),
-                            headers: {
-                                'Content-type': 'application/json'
-                            }
+                        const rewBody = JSON.stringify({
+                          id: rewForm.id,
+                          name: rewForm.name,
+                          favourite: isfavourite(),
+                          rate: rewForm.rate,
+                          age: rewForm.age,
+                          description: rewForm.description,
+                          img_link: rewForm.img_link,
                         });
+                        rewData('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/update/' + rewForm.id, rewBody)
+                            .then(document.querySelector('#sendRewForm').textContent = 'ЗАГРУЗКА')
+                            .then(setTimeout(() => {
+                                location.reload();
+                            }, 1000));
+
                     });
 
                     element.querySelector('.fa-circle-xmark').addEventListener('click', () => {
@@ -115,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     
         favor() {
-            if (this.favorite) {
+            if (this.favourite) {
                 return '<i class="fa-solid fa-heart likes"></i>';
             } else {
                 return '<i class="fa-regular fa-heart likes"></i>';
@@ -136,14 +152,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="title-content">
                     <h3>${this.name}</h3>
                     <hr/>
-                    <div class="intro">${this.shortDescr}</div>
+                    <div class="intro">хороший котя</div>
                 </div>
                 <div class="card-info">${this.description}</div>
                 <div class="utility-info">
                     <ul class="utility-list">
                         <li class="raiting">${'<i class="fa-solid fa-star"></i>'.repeat(this.rate) + '<i class="fa-regular fa-star"></i>'.repeat(10-this.rate)}</li>
                         <li class="birth-date">${this.age}</li>
-                        <li class="favorite">${this.favor()}</li>
+                        <li class="favourite">${this.favor()}</li>
                     </ul>
                 </div>
                 <div class="gradient-overlay"></div>
@@ -171,13 +187,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="modal__info">
                         <h3 class="modal__name">${this.name}</h3>
-                        <div class="modal__intro">${this.shortDescr}</div>
+                        <div class="modal__intro">хороший котя</div>
                         <div class="modal__descr">${this.description}</div>
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li class="raiting">${'<i class="fa-solid fa-star"></i>'.repeat(this.rate) + '<i class="fa-regular fa-star"></i>'.repeat(10-this.rate)}</li>
                                 <li class="birth-date">${this.age}</li>
-                                <li class="favorite">${this.favor()}</li>
+                                <li class="favourite">${this.favor()}</li>
                             </ul>
                         </div>
                     </div>
@@ -222,9 +238,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('.main-overlay').style.visibility = 'visible';
                 document.body.style.overflow = 'hidden';
             });
+
             document.querySelectorAll('.fa-pen-to-square').forEach((item) => {
                 item.addEventListener('click', this.rewriteCard);
             });
+
             document.querySelectorAll('.fa-trash-card').forEach((item, i) => {
                 item.addEventListener('click', this.delCard);
                 item.addEventListener('click', () => {
@@ -232,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     arrCards[i].style.display = 'none';
                 });
             });
+
             document.querySelectorAll('.fa-trash-modal').forEach((item, i) => {
                 item.addEventListener('click', this.delCard);
                 item.addEventListener('click', () => {
@@ -250,10 +269,10 @@ document.addEventListener('DOMContentLoaded', function () {
             this.setListeners();
         }
     }
-    
-    getResource(api).then(data => {
-        data.forEach(({id, age, name, shortDescr, rate, description, favorite, img_link}) => {
-            new CatCard(id, age, name, shortDescr, rate, description, favorite, img_link).init();
+
+    getResource('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show')
+        .then(data => {data.data.forEach(({id, name, favourite, rate, age, description, img_link}) => {
+            new CatCard(id, name, favourite, rate, age, description, img_link).init();
         });
     });
 
@@ -270,21 +289,33 @@ document.addEventListener('DOMContentLoaded', function () {
         statusMessage.textContent = message.loading;
         statusMessage.style.cssText = messageCSS;
         myForm.insertAdjacentElement('afterend', statusMessage);
-        const json = JSON.stringify(Object.fromEntries(new FormData(myForm)));
-        postData(api, json)
+        const formData = Object.fromEntries(new FormData(myForm));
+
+        function isFavour() {
+            if (formData.favourite == 'on') {
+                formData.favourite = true;
+            } else {
+                formData.favourite = false;
+            }
+        }
+        isFavour();
+
+        const json = JSON.stringify(formData);
+
+        new CatCard(formData.id, 
+            formData.name, 
+            formData.favourite,
+            formData.rate, 
+            formData.age, 
+            formData.description,
+            formData.img_link).init();
+
+        postData('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/add', json)
             .then(data => {
                 console.log(data);
                 statusMessage.textContent = message.success;
                 statusMessage.style.cssText = messageCSS;
                 myForm.insertAdjacentElement('afterend', statusMessage);
-                new CatCard(data.id, 
-                            data.age, 
-                            data.name, 
-                            data.shortDescr, 
-                            data.rate, 
-                            data.description, 
-                            data.favorite, 
-                            data.img_link).init();
             }).catch(() => {
                 statusMessage.textContent = message.failure;
                 statusMessage.style.cssText = messageCSS;
