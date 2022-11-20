@@ -31,6 +31,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return await result.json();
     };
+
+    const inputs = document.querySelectorAll('input');
+    for (const input of inputs) {
+        input.value = localStorage[`input_${input.name}`] || '';
+        input.addEventListener('change', function() {
+            localStorage[`input_${this.name}`] = this.value;
+        });
+    }
+    const textArea = document.querySelector('textarea');
+    textArea.value = localStorage[`textarea_${textArea.name}`] || '';
+    textArea.onchange = function() {
+        localStorage[`textarea_${this.name}`] = this.value;
+    };
+
     
     class CatCard {
         constructor(id, name, favourite, rate, age, description, img_link) {
@@ -330,4 +344,3 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
-
