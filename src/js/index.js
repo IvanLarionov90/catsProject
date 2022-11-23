@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         delCard() {        
-            fetch('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/delete/' + this.dataset.id, {
+            fetch('https://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/delete/' + this.dataset.id, {
                 method: 'DELETE',
             });
         }
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         rewriteCard() {
-            getResource('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show/' + this.dataset.id)
+            getResource('https://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show/' + this.dataset.id)
                 .then(data => {
                     document.querySelector('.main-overlay').style.visibility = 'visible';
                     document.body.style.overflow = 'hidden';
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                           description: rewForm.description,
                           img_link: rewForm.img_link,
                         });
-                        rewData('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/update/' + rewForm.id, rewBody)
+                        rewData('https://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/update/' + rewForm.id, rewBody)
                             .then(document.querySelector('#sendRewForm').textContent = 'ЗАГРУЗКА')
                             .then(setTimeout(() => {
                                 location.reload();
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    getResource('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show')
+    getResource('https://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/show')
         .then(data => {data.data.forEach(({id, name, favourite, rate, age, description, img_link}) => {
             new CatCard(id, name, favourite, rate, age, description, img_link).init();
         });
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.description,
             formData.img_link).init();
 
-        postData('http://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/add', json)
+        postData('https://sb-cats.herokuapp.com/api/2/LarisaKuklinova2000/add', json)
             .then(data => {
                 console.log(data);
                 statusMessage.textContent = message.success;
